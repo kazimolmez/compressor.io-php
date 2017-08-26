@@ -7,6 +7,7 @@ use serhatozles\compressorio\CompressorIO;
 $files = [];
 
 $compress = new CompressorIO();
+$compress->backup = true; // default: true. when it's true, create a directory and files will be copied to there before compressed.
 
 $files[] = '/path/to/source/image/file.jpg';
 $compress->compress($files);
