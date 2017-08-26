@@ -1,0 +1,20 @@
+{
+    "name": "serhatozles/compressor.io-php",
+    "type": "library",
+    "description": "Multiple files compressor with Compressor IO",
+    "keywords": ["compress","compressor","compressor.io","compressorio","compress image","image","minify"],
+    "homepage": "https://compressor.io",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.3.0",
+        "ext-pcre": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "serhatozles\\compressio\\": "src/"
+        }
+    },
+    "bin": [
+        "bin/compress"
+    ]
+}

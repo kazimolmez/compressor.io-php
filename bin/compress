@@ -1,0 +1,39 @@
+<?php
+use serhatozles\compressio\CompressorIO;
+
+// command line utility to CompressorIO
+if (file_exists(__DIR__ . '/../../../autoload.php')) {
+    // if composer install
+    require_once __DIR__ . '/../../../autoload.php';
+} else {
+    require_once __DIR__ . '/../src/CompressorIO.php';
+}
+
+$compress = new CompressorIO;
+$compress->console = true;
+
+echo "Multiple(default:true): ";
+$multiple = trim(fgets(STDIN));
+$multiple = $multiple === "false" ? false : true;
+
+$files = [];
+
+if ($multiple) {
+	echo "Extensions(default:png|jpg|jpeg|gif): ";
+	$ext = trim(fgets(STDIN));
+	$ext = $ext ?: 'png|jpg|jpeg|gif';
+	$files = $compress->findFolder($ext);
+} else {
+	echo "Filename(Example: filename.jpg): ";
+	$oneFile = trim(fgets(STDIN));
+	if (empty($oneFile) && !is_file(getcwd() . DIRECTORY_SEPARATOR . $oneFile)) {
+		exit;
+	}
+	$files[] = getcwd() . DIRECTORY_SEPARATOR . $oneFile;
+}
+
+echo "Backup(default:true): ";
+$backup = trim(fgets(STDIN));
+$compress->backup = $backup === "false" ? false : true;
+
+$compress->compress($files);
